@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+import { loggedInUserQuery } from '../queries/queries';
 
 class CreateLogin extends React.Component {
   state = {
@@ -68,7 +69,7 @@ class CreateLogin extends React.Component {
   };
 }
 
-const AUTHENTICATE_USER_MUTATION = gql`
+const authenticateUserMutation = gql`
   mutation AuthenticateUserMutation($email: String!, $password: String!) {
     authenticateUser(email: $email, password: $password) {
       token
@@ -76,16 +77,9 @@ const AUTHENTICATE_USER_MUTATION = gql`
   }
 `;
 
-const LOGGED_IN_USER_QUERY = gql`
-  query LoggedInUserQuery {
-    loggedInUser {
-      id
-    }
-  }
-`;
 export default compose(
-  graphql(AUTHENTICATE_USER_MUTATION, { name: 'authenticateUserMutation' }),
-  graphql(LOGGED_IN_USER_QUERY, {
+  graphql(authenticateUserMutation, { name: 'authenticateUserMutation' }),
+  graphql(loggedInUserQuery, {
     name: 'loggedInUserQuery',
     options: { fetchPolicy: 'network-only' },
   })

@@ -3,6 +3,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import { Table } from 'antd';
+import { allPostsQuery } from '../queries/queries';
 
 class ListPage extends React.Component {
   render() {
@@ -40,20 +41,4 @@ class ListPage extends React.Component {
   }
 }
 
-const ALL_POSTS_QUERY = gql`
-  query AllPostsQuery {
-    allPosts(orderBy: createdAt_DESC) {
-      id
-      title
-      author {
-        name
-      }
-      comments {
-        id
-      }
-      createdAt
-    }
-  }
-`;
-
-export default graphql(ALL_POSTS_QUERY, { name: 'allPostsQuery' })(ListPage);
+export default graphql(allPostsQuery, { name: 'allPostsQuery' })(ListPage);

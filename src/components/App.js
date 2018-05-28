@@ -5,6 +5,7 @@ import ListPage from './ListPage';
 import NewPostLink from './NewPostLink';
 import gql from 'graphql-tag';
 import './App.css';
+import { loggedInUserQuery } from '../queries/queries';
 
 class App extends React.Component {
   _logout = () => {
@@ -80,15 +81,7 @@ class App extends React.Component {
   }
 }
 
-const LOGGED_IN_USER_QUERY = gql`
-  query LoggedInUserQuery {
-    loggedInUser {
-      id
-    }
-  }
-`;
-
-export default graphql(LOGGED_IN_USER_QUERY, {
+export default graphql(loggedInUserQuery, {
   name: 'loggedInUserQuery',
   options: { fetchPolicy: 'network-only' },
 })(withRouter(App));
