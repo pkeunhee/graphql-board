@@ -62,12 +62,14 @@ class PostDetail extends React.Component {
     } = this.state;
 
     return (
-      <article class="baskerville pb5" style={{ marginTop: '10px' }}>
+      <article className="baskerville pb5" style={{ marginTop: '10px' }}>
         <Link to="/" style={{ margin: '10px' }}>
-          <a class="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib purple">뒤로가기</a>
+          <span className="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib purple">
+            뒤로가기
+          </span>
         </Link>
         <a
-          class="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib light-purple"
+          className="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib light-purple"
           onClick={this.showModal1}
           style={{ float: 'right', marginRight: '10px' }}>
           수정하기
@@ -106,7 +108,7 @@ class PostDetail extends React.Component {
         </Modal>
 
         <a
-          class="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib hot-pink"
+          className="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib hot-pink"
           onClick={this.showModal2}
           style={{ float: 'right', marginRight: '10px' }}>
           삭제하기
@@ -120,17 +122,17 @@ class PostDetail extends React.Component {
           <p>{ModalText}</p>
         </Modal>
 
-        <header class="avenir tc-l ph3 ph4-ns pt4 pt5-ns">
-          <h1 class="f3 f2-m f-subheadline-l measure lh-title fw1 mt0">
+        <header className="avenir tc-l ph3 ph4-ns pt4 pt5-ns">
+          <h1 className="f3 f2-m f-subheadline-l measure lh-title fw1 mt0">
             {Post.title}
           </h1>
-          <h4 class="f3 fw4 i lh-title mt0">{Post.author.name}</h4>
-          <time class="f5 f4-l db fw1 baskerville mb4">
+          <h4 className="f3 fw4 i lh-title mt0">{Post.author.name}</h4>
+          <time className="f5 f4-l db fw1 baskerville mb4">
             {Post.createdAt.split('T', 1)}
           </time>
         </header>
-        <div class="measure db center f5 f4-ns lh-copy">
-          <img class="db w-100 mt4 mt5-ns" src={Post.imageUrl} />
+        <div className="measure db center f5 f4-ns lh-copy">
+          <img className="db w-100 mt4 mt5-ns" src={Post.imageUrl} />
           <br />
           <p>{Post.content}</p>
         </div>
