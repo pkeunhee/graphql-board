@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+import { allPostsQuery, loggedInUserQuery } from '../queries/queries';
 
 class CreatePost extends React.Component {
   constructor(props) {
@@ -67,12 +68,13 @@ class CreatePost extends React.Component {
 
     await this.props.createPostMutation({
       variables: { title, content, imageUrl, authorId },
+      refetchQueries: [{ query: allPostsQuery }],
     });
     this.props.history.replace('/');
   };
 }
 
-const CREATE_POST_MUTATION = gql`
+const createPostMutation = gql`
   mutation CreatePostMutation(
     $title: String!
     $content: String!
@@ -90,17 +92,11 @@ const CREATE_POST_MUTATION = gql`
   }
 `;
 
-const LOGGED_IN_USER_QUERY = gql`
-  query LoggedInUserQuery {
-    loggedInUser {
-      id
-    }
-  }
-`;
-
 export default compose(
-  graphql(CREATE_POST_MUTATION, { name: 'createPostMutation' }),
-  graphql(LOGGED_IN_USER_QUERY, {
+  graphql(createPostMutation, {
+    name: 'createPostMutation',
+  }),
+  graphql(loggedInUserQuery, {
     name: 'loggedInUserQuery',
     options: { fetchPolicy: 'network-only' },
   })
