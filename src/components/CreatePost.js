@@ -21,39 +21,45 @@ class CreatePost extends React.Component {
     }
 
     return (
-      <div className="w-100 pa4 flex justify-center">
-        <div style={{ maxWidth: 800 }} className="">
-          <input
-            className="w-100 pa3 mv2"
-            value={this.state.title}
-            placeholder="title"
-            onChange={e => this.setState({ title: e.target.value })}
-          />
-          <input
-            className="w-100 pa3 mv2"
-            value={this.state.content}
-            placeholder="content"
-            onChange={e => this.setState({ content: e.target.value })}
-          />
-          <input
-            className="w-100 pa3 mv2"
-            value={this.state.imageUrl}
-            placeholder="Image Url"
-            onChange={e => this.setState({ imageUrl: e.target.value })}
-          />
-          {this.state.imageUrl && (
-            <img src={this.state.imageUrl} alt="" className="w-100 mv3" />
-          )}
-          {this.state.content &&
-            this.state.imageUrl && (
-              <button
-                className="pa3 bg-black-10 bn dim ttu pointer"
-                onClick={this.handlePost}>
-                작성완료
-              </button>
+      <form>
+        <div className="w-100 pa4 flex justify-center">
+          <div style={{ maxWidth: 800 }} className="">
+            <input
+              className="w-100 pa3 mv2"
+              value={this.state.title}
+              placeholder="title"
+              onChange={e => this.setState({ title: e.target.value })}
+            />
+            <textarea
+              style={{ height: 300 }}
+              className="w-100 pa3 mv2"
+              value={this.state.content}
+              placeholder="content"
+              onChange={e => this.setState({ content: e.target.value })}
+            />
+            <input
+              className="w-100 pa3 mv2"
+              value={this.state.imageUrl}
+              placeholder="Image Url"
+              onChange={e => this.setState({ imageUrl: e.target.value })}
+            />
+            {this.state.imageUrl && (
+              <img src={this.state.imageUrl} alt="" className="w-100 mv3" />
             )}
+            {this.state.title.length < 2 && (
+              <span style={{ color: 'red' }}>제목을 3자 이상 입력해주세요</span>
+            )}
+            {this.state.content &&
+              this.state.imageUrl && (
+                <button
+                  className="pa3 bg-black-10 bn dim ttu pointer"
+                  onClick={this.handlePost}>
+                  작성완료
+                </button>
+              )}
+          </div>
         </div>
-      </div>
+      </form>
     );
   }
 
