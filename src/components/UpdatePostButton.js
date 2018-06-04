@@ -38,7 +38,7 @@ class UpdatePostButton extends React.Component {
         <a
           className="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib light-purple"
           onClick={this.showModal}
-          style={{ float: 'right', marginRight: '10px' }}>
+          style={{ float: 'right', marginRight: '10px', marginTop: '-50px' }}>
           수정하기
         </a>
         <Modal
