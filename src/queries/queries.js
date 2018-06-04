@@ -29,6 +29,7 @@ const postQuery = gql`
     Post(id: $id) {
       id
       author {
+        id
         name
       }
       title

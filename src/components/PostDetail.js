@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import gql from 'graphql-tag';
 import UpdatePostButton from './UpdatePostButton';
 import DeletePostButton from './DeletePostButton';
-import { postQuery } from '../queries/queries';
+import { loggedInUserQuery, postQuery } from '../queries/queries';
 
 class PostDetail extends React.Component {
   constructor(props) {
@@ -22,6 +22,12 @@ class PostDetail extends React.Component {
     }
 
     const { Post } = this.props.postQuery;
+    const { loggedInUser } = this.props.loggedInUserQuery;
+
+    console.log(JSON.stringify(Post.author.id), ' Post');
+    if (loggedInUser) {
+      console.log(JSON.stringify(loggedInUser.id), ' Login');
+    }
 
     return (
       <article className="baskerville pb5" style={{ marginTop: '10px' }}>
@@ -30,8 +36,16 @@ class PostDetail extends React.Component {
             뒤로가기
           </span>
         </Link>
-        <UpdatePostButton />
-        <DeletePostButton />
+
+        {loggedInUser
+          ? JSON.stringify(Post.author.id) ===
+              JSON.stringify(loggedInUser.id) && (
+              <span>
+                <UpdatePostButton />
+                <DeletePostButton />
+              </span>
+            )
+          : null}
 
         <header className="avenir tc-l ph3 ph4-ns pt4 pt5-ns">
           <h1 className="f3 f2-m f-subheadline-l measure lh-title fw1 mt0">
@@ -53,6 +67,9 @@ class PostDetail extends React.Component {
 }
 
 export default compose(
+  graphql(loggedInUserQuery, {
+    name: 'loggedInUserQuery',
+  }),
   graphql(postQuery, {
     name: 'postQuery',
     options: ({ match }) => ({
