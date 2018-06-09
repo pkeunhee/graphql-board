@@ -33,6 +33,7 @@ class ListPage extends React.Component {
             },
           ]}
           dataSource={allPosts}
+          pagination={{ pageSize: 10 }}
           size="middle"
           rowKey="id"
         />
