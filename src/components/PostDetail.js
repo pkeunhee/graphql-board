@@ -24,11 +24,6 @@ class PostDetail extends React.Component {
     const { Post } = this.props.postQuery;
     const { loggedInUser } = this.props.loggedInUserQuery;
 
-    console.log(JSON.stringify(Post.author.id), ' Post');
-    if (loggedInUser) {
-      console.log(JSON.stringify(loggedInUser.id), ' Login');
-    }
-
     return (
       <article className="baskerville pb5" style={{ marginTop: '10px' }}>
         <Link to="/" style={{ margin: '10px' }}>
@@ -38,8 +33,7 @@ class PostDetail extends React.Component {
         </Link>
 
         {loggedInUser
-          ? JSON.stringify(Post.author.id) ===
-              JSON.stringify(loggedInUser.id) && (
+          ? Post.author.id === loggedInUser.id && (
               <span>
                 <UpdatePostButton />
                 <DeletePostButton />
